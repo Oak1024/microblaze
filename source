@@ -9,7 +9,10 @@ https://blog.csdn.net/cuifuxiang/article/details/86551813
 Xilinx MicroBlaze实践总结，一些步骤和细节
 https://blog.csdn.net/lijiuyangzilsc/article/details/51119481
 
-microblaze 使用lwip协议栈的一点体会
+在嵌入式设计中使用MicroBlaze（Vivado版本）
+https://blog.csdn.net/DuinoDu/article/details/46723181
+
+microblaze 使用lwip协议栈的一点体会，XAPP1026
 https://www.veryarm.com/176533.html
     有个项目要用以太网传大量数据，spartan6+ddr3+千兆以太网，内核采用microblaze软核，逻辑搭mac，phy芯片用的88E1111。
 最开始采用xilinx官方的例子XAPP1026，ISE13.1，1500数据帧下跑TCP协议大概收120Mbit/s，发110Mbit/s。但是重新编译
@@ -20,3 +23,6 @@ https://www.veryarm.com/176533.html
     硬件生成后，export到软件EDK中，生成新的硬件支持包（bsp），然后import原来的XAPP1026下面的AXI系统（raw 模式）。
 系统就可以跑了。测试一下网速，发送60Mbit/s,接受120Mbit/s,发送通道的设置上肯定存在某方面的问题，现在还不太明白。
 后来尝试一下巨帧模式（9k数据包），发送速度120Mbit/s，接收速度可以达到330Mbit/s.
+
+ZYNQ基础系列（七） LWIP数据通路 -- PL数据->PS->PC机（TCP）
+https://blog.csdn.net/long_fly/article/details/79760956
