@@ -1,0 +1,22 @@
+搜索关键词 xilinx microblaze lwip
+
+Microblaze入门,关于GPIO，BRAM和浮点数，并提供了几个链接参考
+https://blog.csdn.net/truecrab/article/details/79776437
+
+关于microblaze的解释与SDK启动
+https://blog.csdn.net/cuifuxiang/article/details/86551813
+
+Xilinx MicroBlaze实践总结，一些步骤和细节
+https://blog.csdn.net/lijiuyangzilsc/article/details/51119481
+
+microblaze 使用lwip协议栈的一点体会
+https://www.veryarm.com/176533.html
+    有个项目要用以太网传大量数据，spartan6+ddr3+千兆以太网，内核采用microblaze软核，逻辑搭mac，phy芯片用的88E1111。
+最开始采用xilinx官方的例子XAPP1026，ISE13.1，1500数据帧下跑TCP协议大概收120Mbit/s，发110Mbit/s。但是重新编译
+之后，就出问题了，发送时总提示dma错误。于是自己在13.4下建立新工程，按照SP605开发板的设置向导，搭建系统，最后将时
+钟改成单端时钟，并且Valid一下。然后按照自己的板子更改时钟等管脚约束，就可以生成bit流了。在编译方面，Xilinx的确很
+费劲，一般首次要花40分钟的时间才能完成，之后的小修改大概要花10-20分钟，和Altera的Nios相比费了很多时间（5k LE的
+系统Nios一般3分钟就差不多了）。
+    硬件生成后，export到软件EDK中，生成新的硬件支持包（bsp），然后import原来的XAPP1026下面的AXI系统（raw 模式）。
+系统就可以跑了。测试一下网速，发送60Mbit/s,接受120Mbit/s,发送通道的设置上肯定存在某方面的问题，现在还不太明白。
+后来尝试一下巨帧模式（9k数据包），发送速度120Mbit/s，接收速度可以达到330Mbit/s.
